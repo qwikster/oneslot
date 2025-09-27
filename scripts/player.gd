@@ -1,18 +1,23 @@
 extends CharacterBody2D
 @export var speed = 300
+@export var sprint_speed = 600
 @onready var animated_sprite = $PlayerSprite
 var last_dir = "north"
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		input_vector.x += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		input_vector.x -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("down"):
 		input_vector.y += 1
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("up"):
 		input_vector.y -= 1
+	if Input.is_action_pressed("sprint"):
+		speed = sprint_speed
+	else:
+		speed = 300
 
 	# Normalize the input vector to prevent faster diagonal movement
 	if input_vector.length() > 0:

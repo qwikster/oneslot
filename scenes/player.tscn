@@ -353,7 +353,7 @@ scale = Vector2(5.0156245, 5.0156245)
 sprite_frames = SubResource("SpriteFrames_dqoq3")
 animation = &"idle_east"
 autoplay = "idle_east"
-frame_progress = 0.77461874
+frame_progress = 0.23784472
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y8tjj")
