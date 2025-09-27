@@ -11,9 +11,23 @@ config_version=5
 [application]
 
 config/name="Oneslot"
+run/main_scene="uid://dp1ubikb2s43n"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/crt/plugin.cfg")
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/defaults/default_clear_color=Color(0.16206557, 0.1620656, 0.16206557, 1)

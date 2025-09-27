@@ -1,3 +1,55 @@
-[gd_scene format=3 uid="uid://dp1ubikb2s43n"]
+[gd_scene load_steps=8 format=3 uid="uid://dp1ubikb2s43n"]
+
+[ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bghaddibpt6f1" path="res://addons/crt/crt.gd" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://byxjj5p5k3w0v" path="res://animations/south_walk/southwalk_1.png" id="3_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cce1chxga61rq" path="res://animations/south_walk/southwalk_2.png" id="4_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://c0mimwg64n4j6" path="res://animations/south_walk/southwalk_3.png" id="5_tipki"]
+[ext_resource type="Texture2D" uid="uid://7hwryv3klvle" path="res://animations/south_walk/southwalk_4.png" id="6_85g3d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_choun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tefeu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o6xl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tipki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_85g3d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 280.0
+offset_bottom = 76.0
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 64
+text = "This is a cool font"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(953, 521)
+scale = Vector2(5.0156245, 5.0156245)
+sprite_frames = SubResource("SpriteFrames_choun")
+autoplay = "default"
+frame_progress = 0.74059874
+
+[node name="CRT" type="CanvasLayer" parent="."]
+script = ExtResource("2_0wfyh")
+scan_line_strength = -6.0
+warp_amount = 0.15
+noise_amount = 0.015
+grille_amount = 0.05
+vignette_intensity = 0.2
+metadata/_custom_type_script = "uid://bghaddibpt6f1"
