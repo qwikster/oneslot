@@ -1,8 +1,11 @@
 extends CharacterBody2D
 @export var speed = 300
-@export var sprint_speed = 600
+@export var sprint_speed = 5000
 @onready var animated_sprite = $PlayerSprite
 var last_dir = "north"
+
+func _ready():
+	add_to_group("player")
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO

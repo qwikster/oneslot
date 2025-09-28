@@ -2,56 +2,92 @@ extends CanvasLayer
 
 var index: int = 0
 var awaiting_input: bool = false
+var current_dialogue: String = ""
+signal dialogue_over(boss_name: String)
 var current_boss: String = ""
 
-# Dialogue data for all five bosses
-# Each boss has a list of dicts
-# Dict keys: "speaker", "text", optional "choices"
-# "choices" is array of dicts { "text": String, "next": int }
 var dialogues := {
-	"boss1": [
-		{ "speaker": "Ares", "text": "You dare enter my domain, mortal?" },
-		{ "speaker": "Ares", "text": "Do you carry the Sword of Truth?",
+	"boss1_success": [
+		{ "speaker": "Robot", "text": "You notice a rusty robot blocking the way." },
+		{ "speaker": "Robot", "text": "It guards the path onwards; it must be sacrificed." },
+		{ "speaker": "Robot", "text": "You strike the robot as it runs towards you." },
+		{ "speaker": "Robot", "text": "Finish it, or move forward?",
 		  "choices": [
-			  { "text": "Yes, I wield it!", "next": 2 },
-			  { "text": "No...", "next": 3 }
+			  { "text": "Finish", "next": 4 },
+			  { "text": "Forward", "next": 5 }
 		  ]
 		},
-		{ "speaker": "Ares", "text": "crash"},
-		{ "speaker": "Ares", "text": "Without it, you are nothing." }
+		{ "speaker": "Robot", "text": "The robot's eyes darken, lifeless." },
+		{ "speaker": "Robot", "text": "The robot's eyes dim, a broken heap." }
 	],
-	"boss2": [
-		{ "speaker": "Nyx", "text": "The shadows whisper your fate." },
-		{ "speaker": "Nyx", "text": "Only the Shield of Hope protects from eternal night." },
-		{ "speaker": "Nyx", "text": "Do you stand ready?" }
+	"boss1_fail": [
+		{ "speaker": "Robot", "text": "What made you think a spoon would help?" },
+		{ "speaker": "Robot", "text": "crash" }
 	],
-	"boss3": [
-		{ "speaker": "Kronos", "text": "Time bends to my will." },
-		{ "speaker": "Kronos", "text": "Show me your Amulet of Despair!",
+
+	"boss2_success": [
+		{ "speaker": "Sentinel", "text": "A toaster-looking robot blocks the way." },
+		{ "speaker": "Sentinel", "text": "Can it toast bread? No." },
+		{ "speaker": "Sentinel", "text": "You attack and it short-circuits." },
+		{ "speaker": "Sentinel", "text": "\"COVENANT MEMBER LOST ??!?!?" },
+		{ "speaker": "Sentinel", "text": "It still doesn't toast bread." },
+		{ "speaker": "Sentinel", "text": "Metal pipe sound effect." }
+	],
+	"boss2_fail": [
+		{ "speaker": "Sentinel", "text": "Metal pipe sound effect" },
+		{ "speaker": "Sentinel", "text": "crash" }
+	],
+
+	"boss3_success": [
+		{ "speaker": "Senator", "text": "\"Nanomachines, son\"" },
+		{ "speaker": "Senator", "text": "This isn't Metal Gear, but close enough." },
+		{ "speaker": "Senator", "text": "\"Played college ball, you know\"" },
+		{ "speaker": "Senator", "text": "\"Try University of Texas\"" },
+		{ "speaker": "Senator", "text": "You attack and he falls easily." }
+	],
+	"boss3_fail": [
+		{ "speaker": "Senator", "text": "gooner" },
+		{ "speaker": "Senator", "text": "crash" }
+	],
+
+	"boss4_success": [
+		{ "speaker": "Conduit", "text": "It's just a heap of metal conduit." },
+		{ "speaker": "Conduit", "text": "You cut it out of your way." },
+		{ "speaker": "Conduit", "text": "That was easy. Wow." }
+	],
+	"boss4_fail": [
+		{ "speaker": "Conduit", "text": "why did you think that would help" },
+		{ "speaker": "Conduit", "text": "crash" }
+	],
+
+	"boss5_fail": [
+		{ "speaker": "???", "text": "So we finally meet." },
+		{ "speaker": "???", "text": "AAAAAAAAAAAA" },
+		{ "speaker": "???", "text": "The information leaks further." },
+		{ "speaker": "???", "text": "I must purge it... but." },
+		{ "speaker": "???", "text": "You can't save the world if you save me." },
+		{ "speaker": "???", "text": "Sacrifices must be made." },
+		{ "speaker": "???", "text": "Take the data. I'll watch on elsewhere.",
 		  "choices": [
-			  { "text": "I have it.", "next": 2 },
-			  { "text": "I do not.", "next": 3 }
+			  { "text": "Delete data", "next": 8 },
+			  { "text": "Take data", "next": 9 }
 		  ]
 		},
-		{ "speaker": "Kronos", "text": "Then your fate is sealed." },
-		{ "speaker": "Kronos", "text": "Pathetic. Die now." }
+		{ "speaker": "???", "text": "crash" },
+		{ "speaker": "???", "text": "WHY WOULD YOU DO THAT" }
 	],
-	"boss4": [
-		{ "speaker": "Helios", "text": "The sun burns away all lies." },
-		{ "speaker": "Helios", "text": "But you brought the wrong relic. This world ends now." }
-	],
-	"boss5": [
-		{ "speaker": "Thanatos", "text": "Death waits for none." },
-		{ "speaker": "Thanatos", "text": "The items you bear are worthless against me." }
+	"boss5_success": [
+		{ "speaker": "???", "text": "crash" }
 	]
 }
 
+
 var boss_requirements := {
-	"boss1": ["sword_of_truth"],
-	"boss2": ["shield_of_hope"],
-	"boss3": ["amulet_of_despair"],
-	"boss4": ["invalid_item"],
-	"boss5": ["invalid_item"]
+	"boss1": ["spoon", "remote"],
+	"boss2": ["loop", "chip"],
+	"boss3": ["gemchip", "ball"],
+	"boss4": ["shard", "coin"], 
+	"boss5": ["sdfjsdf"] # fail is normal theme
 }
 
 func _ready() -> void:
@@ -59,36 +95,44 @@ func _ready() -> void:
 	$Speaker.hide()
 	$Text.hide()
 	$Choices.hide()
-	start_boss_encounter("boss1")
+
 
 func start_boss_encounter(boss_name: String):
-	var required = boss_requirements[boss_name]
-	var valid = false
-	for item in required:
-		if Inventory.has_item(item):
-			valid = true
-			break
-
-	if not valid:
-		push_error("Wrong item used against %s → intentional crash" % boss_name)
-		# OS.crash("dumbas")
-
 	current_boss = boss_name
+	var valid = false
+	if boss_requirements[boss_name].has(Inventory.items):
+		valid = true
+	else:
+		valid = false
+
+	if valid:
+		current_dialogue = boss_name + "_success"
+	else:
+		current_dialogue = boss_name + "_fail"
+
 	index = 0
 	show_next_line()
 
+
 func show_next_line():
-	var lines = dialogues[current_boss]
+	var lines = dialogues[current_dialogue]   # FIXED: was current_boss
 	if index >= lines.size():
 		end_dialog()
 		return
 
 	var line = lines[index]
+
+	# Handle "crash" as a command, not text
+	if line.has("text") and line.text == "crash":
+		OS.crash("Dialogue-triggered crash")
+		return
+
 	if line.has("choices"):
 		show_choices(line)
 	else:
 		show_dialog(line.speaker, line.text)
 		index += 1
+
 
 func show_dialog(speaker: String, text: String):
 	awaiting_input = true
@@ -97,6 +141,7 @@ func show_dialog(speaker: String, text: String):
 	$Speaker.show()
 	$Text.show()
 	$Choices.hide()
+
 
 func show_choices(line: Dictionary):
 	awaiting_input = false
@@ -117,11 +162,10 @@ func show_choices(line: Dictionary):
 			btn.text = choice.text
 			btn.show()
 
-			# Disconnect old signals if already connected
+			# Avoid duplicate connections
 			if btn.is_connected("pressed", Callable(self, "_on_choice_selected")):
 				btn.disconnect("pressed", Callable(self, "_on_choice_selected"))
 
-			# Connect and bind the index
 			btn.connect("pressed", Callable(self, "_on_choice_selected").bind(choice.next))
 		else:
 			btn.hide()
@@ -132,13 +176,12 @@ func _on_choice_selected(next_index: int):
 	index = next_index
 	awaiting_input = true
 	show_next_line()
-	
-	if $Text/Label.text == "crash":
-		OS.crash("dumbas")
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if awaiting_input and event.is_action_pressed("interact"):
 		show_next_line()
+
 
 func end_dialog():
 	$Speaker.hide()
