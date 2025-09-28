@@ -341,8 +341,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8tjj"]
-size = Vector2(124, 206)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tk41t"]
+radius = 38.0
+height = 184.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_tk41t")
@@ -356,6 +357,7 @@ autoplay = "idle_east"
 frame_progress = 0.23784472
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_y8tjj")
+position = Vector2(-6, -4)
+shape = SubResource("CapsuleShape2D_tk41t")
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -9,24 +9,22 @@ height = 52.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ro5b8"]
 font = ExtResource("2_6muww")
-font_size = 12
+font_size = 24
 
 [node name="Item" type="Area2D"]
 script = ExtResource("1_s8enn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(7, 23)
 texture = ExtResource("2_vljjh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(10, 23)
 shape = SubResource("CapsuleShape2D_vljjh")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -16.0
-offset_top = -28.0
-offset_right = 35.0
-offset_bottom = -3.0
+offset_left = -89.0
+offset_top = -56.0
+offset_right = 89.0
+offset_bottom = -31.0
 text = "Spoon"
 label_settings = SubResource("LabelSettings_ro5b8")
 horizontal_alignment = 1

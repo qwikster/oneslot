@@ -10,13 +10,16 @@ func _ready() -> void:
 
 	if $Label:
 		$Label.text = display_name
+	else:
+		push_warning("No Label node found in Item '%s'" % name)
 
-	connect("body_entered", _on_body_entered)
+	connect("body_entered", Callable(self, "_on_body_entered"))
 
 func _on_body_entered(body: Node) -> void:
-	if body.name == "Player":
-		var ui = get_tree().root.get_node("Main/UI")
-		ui.show_popup("Pick up %s?" % $Label.text, self)
+	if body.is_in_group("player") or body.name == "Player":
+		var ui = get_tree().current_scene.get_node("UI")
+		if ui and ui.has_method("show_popup"):
+			ui.show_popup("Pick up %s?" % display_name, self)
 
 func on_choice_made(taken: bool) -> void:
 	if taken:
