@@ -21,36 +21,34 @@ func _physics_process(delta):
 		speed = 300
 		$PlayerSprite.speed_scale = 1
 
-	# Normalize the input vector to prevent faster diagonal movement
 	if input_vector.length() > 0:
 		input_vector = input_vector.normalized()
 		velocity = input_vector * speed
 		update_animation(input_vector)
 	else:
 		velocity = Vector2.ZERO
-		update_animation(input_vector) # Update to idle animation
+		update_animation(input_vector)
 
 	move_and_slide()
 
 func update_animation(direction_vector):
 	var animation_name = "idle_north"
 	if direction_vector.length() > 0:
-		# Determine the direction for animation
-		if direction_vector.y < 0: # Up
+		if direction_vector.y < 0: 
 			if direction_vector.x < 0:
 				animation_name = "walk_northwest"
 			elif direction_vector.x > 0:
 				animation_name = "walk_northeast"
 			else:
 				animation_name = "walk_north"
-		elif direction_vector.y > 0: # Down
+		elif direction_vector.y > 0: 
 			if direction_vector.x < 0:
 				animation_name = "walk_southwest"
 			elif direction_vector.x > 0:
 				animation_name = "walk_southeast"
 			else:
 				animation_name = "walk_south"
-		else: # Horizontal
+		else:
 			if direction_vector.x < 0:
 				animation_name = "walk_west"
 			elif direction_vector.x > 0:
