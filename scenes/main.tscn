@@ -294,7 +294,7 @@ label_settings = SubResource("LabelSettings_tefeu")
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 z_index = 2
-position = Vector2(3645, 1588)
+position = Vector2(978, 580)
 
 [node name="CRT" type="CanvasLayer" parent="Player"]
 script = ExtResource("2_0wfyh")
