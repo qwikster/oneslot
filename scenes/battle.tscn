@@ -40,3 +40,15 @@ temps tring
 temp string
 sdfsdgdfgsdfgdg"
 label_settings = SubResource("LabelSettings_cpc1a")
+
+[node name="Choices" type="VBoxContainer" parent="."]
+offset_left = 1636.0
+offset_top = 827.0
+offset_right = 1916.0
+offset_bottom = 1064.0
+
+[node name="Button" type="Button" parent="Choices"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Choices"]
+layout_mode = 2
