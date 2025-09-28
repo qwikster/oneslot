@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccdjgcfos3snr"]
+
+[ext_resource type="Script" uid="uid://bmuqr1f3i4ft2" path="res://scripts/popup.gd" id="1_cpc1a"]
+[ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="2_gxv0h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cpc1a"]
+font = ExtResource("2_gxv0h")
+font_size = 64
+
+[node name="Popup" type="CanvasLayer"]
+script = ExtResource("1_cpc1a")
+
+[node name="PopupPanel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -253.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="PopupPanel"]
+layout_mode = 2
+text = "balls balls balls balls balls balls balls balls 
+balls balls balls balls balls balls balls balls 
+balls balls balls balls balls balls balls balls "
+label_settings = SubResource("LabelSettings_cpc1a")

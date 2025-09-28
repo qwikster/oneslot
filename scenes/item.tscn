@@ -1,43 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx6hij5afr410"]
+[gd_scene load_steps=6 format=3 uid="uid://cx6hij5afr410"]
 
 [ext_resource type="Script" uid="uid://brvs52goq2w0m" path="res://scripts/item.gd" id="1_s8enn"]
-[ext_resource type="Texture2D" uid="uid://dagbjj7c2mnn6" path="res://icon.svg" id="2_112p8"]
+[ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="2_6muww"]
+[ext_resource type="Texture2D" uid="uid://dux1anc0niyug" path="res://sprites/inner1.png" id="2_vljjh"]
 
-[node name="Node" type="Node"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vljjh"]
+height = 52.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[sub_resource type="LabelSettings" id="LabelSettings_ro5b8"]
+font = ExtResource("2_6muww")
+font_size = 12
+
+[node name="Item" type="Area2D"]
 script = ExtResource("1_s8enn")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, 23)
+texture = ExtResource("2_vljjh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 23)
+shape = SubResource("CapsuleShape2D_vljjh")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
-
-[node name="TextureRect" type="TextureRect" parent="CharacterBody2D/CanvasLayer"]
-offset_left = 239.0
-offset_top = 79.0
-offset_right = 367.0
-offset_bottom = 207.0
-texture = ExtResource("2_112p8")
-
-[node name="Label" type="Label" parent="CharacterBody2D/CanvasLayer/TextureRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "balala"
-
-[node name="Window" type="Window" parent="CharacterBody2D/CanvasLayer"]
-oversampling_override = 1.0
-
-[node name="Popup" type="Popup" parent="CharacterBody2D/CanvasLayer/Window"]
-oversampling_override = 1.0
-visible = true
-
-[node name="PopupMenu" type="PopupMenu" parent="CharacterBody2D/CanvasLayer/Window/Popup"]
-oversampling_override = 1.0
-visible = true
-
-[node name="Label" type="Label" parent="CharacterBody2D/CanvasLayer/Window/Popup/PopupMenu"]
-offset_right = 75.0
-offset_bottom = 38.0
+[node name="Label" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -28.0
+offset_right = 35.0
+offset_bottom = -3.0
+text = "Spoon"
+label_settings = SubResource("LabelSettings_ro5b8")
+horizontal_alignment = 1

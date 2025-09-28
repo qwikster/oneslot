@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://dp1ubikb2s43n"]
+[gd_scene load_steps=13 format=4 uid="uid://dp1ubikb2s43n"]
 
 [ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="1_tbgi4"]
 [ext_resource type="Script" uid="uid://bghaddibpt6f1" path="res://addons/crt/crt.gd" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://cjjm2j6axsa5m" path="res://sprites/purplecity.png" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bybpvyqq1vylw" path="res://scenes/player.tscn" id="2_sugp2"]
-[ext_resource type="Texture2D" uid="uid://htjeh3f8own5" path="res://shaders/1-7_object_0004.png" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://ccdjgcfos3snr" path="res://scenes/popup.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cx6hij5afr410" path="res://scenes/item.tscn" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dux1anc0niyug" path="res://sprites/inner1.png" id="7_o6xl0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("2_jyhfs")
@@ -204,7 +206,7 @@ font = ExtResource("1_tbgi4")
 font_size = 130
 font_color = Color(0.69, 0, 0, 1)
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(3.8146973e-06, 4.172325e-07)
@@ -368,7 +370,11 @@ offset_bottom = 332.0
 text = "And the child spoke."
 label_settings = SubResource("LabelSettings_tefeu")
 
-[node name="17Object0004" type="Sprite2D" parent="."]
-position = Vector2(1807, -4040)
-scale = Vector2(3.5208333, 3.5208333)
-texture = ExtResource("5_tbgi4")
+[node name="UI" parent="." instance=ExtResource("5_tbgi4")]
+
+[node name="Item" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(4721, -5339)
+scale = Vector2(3, 3)
+item_name = "spoon"
+display_name = "Large Spoon"
+item_texture = ExtResource("7_o6xl0")
