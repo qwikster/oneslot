@@ -1,6 +1,6 @@
 extends CharacterBody2D
 @export var speed = 300
-@export var sprint_speed = 5000
+@export var sprint_speed = 600
 @onready var animated_sprite = $PlayerSprite
 var last_dir = "north"
 
