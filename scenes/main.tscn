@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=4 uid="uid://dp1ubikb2s43n"]
+[gd_scene load_steps=26 format=4 uid="uid://dp1ubikb2s43n"]
 
 [ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="1_tbgi4"]
 [ext_resource type="Script" uid="uid://bghaddibpt6f1" path="res://addons/crt/crt.gd" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://cjjm2j6axsa5m" path="res://sprites/purplecity.png" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bybpvyqq1vylw" path="res://scenes/player.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" path="res://scenes/popup.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c4id8qmb7awvc" path="res://scenes/popup.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://dp60ou10w33sa" path="res://scenes/dialogue.tscn" id="6_0ld40"]
 [ext_resource type="PackedScene" uid="uid://cx6hij5afr410" path="res://scenes/item.tscn" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://dux1anc0niyug" path="res://sprites/inner1.png" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://bc70xg5hnodsu" path="res://sprites/inner2.png" id="8_tipki"]
@@ -253,7 +254,7 @@ label_settings = SubResource("LabelSettings_tefeu")
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 z_index = 2
-position = Vector2(-125, 389)
+position = Vector2(2310, -4331)
 
 [node name="CRT" type="CanvasLayer" parent="Player"]
 script = ExtResource("2_0wfyh")
@@ -599,7 +600,9 @@ offset_bottom = 1473.0
 text = "Choose."
 label_settings = SubResource("LabelSettings_gqmmt")
 
-[node name="UI" parent="." instance=ExtResource("5_tbgi4")]
+[node name="Popup" parent="." instance=ExtResource("5_tbgi4")]
+
+[node name="Dialogue" parent="." instance=ExtResource("6_0ld40")]
 
 [node name="Area2D" type="Area2D" parent="."]
 

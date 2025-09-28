@@ -1,52 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4id8qmb7awvc"]
+[gd_scene load_steps=4 format=3 uid="uid://c4id8qmb7awvc"]
 
-[ext_resource type="Script" path="res://scripts/popup.gd" id="1_cpc1a"]
+[ext_resource type="Script" uid="uid://bmuqr1f3i4ft2" path="res://scripts/popup.gd" id="1_cpc1a"]
 [ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="2_gxv0h"]
-[ext_resource type="PackedScene" uid="uid://dp60ou10w33sa" path="res://scenes/battle.tscn" id="3_gxv0h"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_cpc1a"]
+[sub_resource type="LabelSettings" id="LabelSettings_4ebxx"]
 font = ExtResource("2_gxv0h")
 font_size = 64
 
 [node name="Popup" type="CanvasLayer"]
 script = ExtResource("1_cpc1a")
 
-[node name="Speaker" type="PanelContainer" parent="."]
+[node name="PopupPanel" type="PanelContainer" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -353.0
-offset_right = -1625.0
-offset_bottom = -258.0
+offset_top = -256.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="Speaker"]
+[node name="Label" type="Label" parent="PopupPanel"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_cpc1a")
-
-[node name="Text" type="PanelContainer" parent="."]
-offset_top = 827.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="Text"]
-layout_mode = 2
-text = "temp  string
-temps tring
-temp string
-sdfsdgdfgsdfgdg"
-label_settings = SubResource("LabelSettings_cpc1a")
-
-[node name="Popup" parent="." instance=ExtResource("3_gxv0h")]
-
-[node name="PanelContainer2" type="PanelContainer" parent="Popup"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Popup/PanelContainer2"]
-layout_mode = 2
+text = "balls?"
+label_settings = SubResource("LabelSettings_4ebxx")

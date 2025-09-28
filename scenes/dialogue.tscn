@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://dp60ou10w33sa"]
 
-[ext_resource type="Script" uid="uid://d0coadcfrlsc6" path="res://scripts/dialogue.gd" id="1_p1qf1"]
-[ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="2_6muww"]
+[ext_resource type="Script" uid="uid://d0coadcfrlsc6" path="res://scripts/dialogue.gd" id="1_3n4vj"]
+[ext_resource type="FontFile" uid="uid://cjovg4wwhsdai" path="res://VCR_OSD.ttf" id="2_bfpow"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cpc1a"]
-font = ExtResource("2_6muww")
+font = ExtResource("2_bfpow")
 font_size = 64
 
-[node name="Popup" type="CanvasLayer"]
-script = ExtResource("1_p1qf1")
+[node name="Dialogue" type="CanvasLayer"]
+script = ExtResource("1_3n4vj")
 
 [node name="Speaker" type="PanelContainer" parent="."]
 anchors_preset = 12
