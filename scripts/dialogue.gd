@@ -17,11 +17,11 @@ var dialog = [
 	"speaker": "orin",
 	"text": "shit"
   },
-{
-	"speaker": "ricky",
-	"text": "i use windows btw"
-}
-]
+	{
+		"speaker": "ricky",
+		"text": "i use windows btw"
+	}
+	]
 
 
 var index := 0
@@ -80,15 +80,12 @@ func show_choices(line: Dictionary):
 			var choice = choices[i]
 			btn.text = choice.text
 			btn.show()
-			#btn.disconnect_all("pressed") # Prevent duplicate connections
 			btn.connect("pressed", Callable(self, "_on_choice_selected").bind(choice.next))
 		else:
 			btn.hide()
 
 func _on_choice_selected(next_index: int):
 	$Choices.hide()
-	#for btn in $Choices.get_children():
-		#btn.disconnect_all("pressed")
 	index = next_index
 	awaiting_input = true
 	show_next_line()
@@ -104,4 +101,4 @@ func end_dialog():
 	$Text.hide()
 	$Choices.hide()
 	awaiting_input = false
-	print("Dialog finished.")
+	print("dialog over")
