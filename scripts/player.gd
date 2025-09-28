@@ -16,8 +16,10 @@ func _physics_process(delta):
 		input_vector.y -= 1
 	if Input.is_action_pressed("sprint"):
 		speed = sprint_speed
+		$PlayerSprite.speed_scale = 1.75
 	else:
 		speed = 300
+		$PlayerSprite.speed_scale = 1
 
 	# Normalize the input vector to prevent faster diagonal movement
 	if input_vector.length() > 0:
